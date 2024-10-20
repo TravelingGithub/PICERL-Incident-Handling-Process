@@ -19,7 +19,7 @@
 
 
 # Project
-Exercise for using the PICERL Incident Handling process for handling a simulated spear phishing incident [T1566.001](https://attack.mitre.org/techniques/T1566/001/). For 
+Exercise for using the PICERL Incident Handling process for handling a simulated spear phishing incident [T1566.001](https://attack.mitre.org/techniques/T1566/001/). 
 
 ## Lab Overview
 Microsoft Advanced Threat Analytics is set up on the WEF machine, and a lightweight ATA gateway is on the DC.  There are pre-installed tools like Splunk, Powershell logging, and Sysmon to help monitor and log system activity.  Additionally, Zeek and Suricata are configured to track network traffic, while Guacamole allows users to access all hosts from their web browser.
