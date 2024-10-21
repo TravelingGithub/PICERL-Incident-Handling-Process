@@ -22,7 +22,7 @@
 Exercise for using the PICERL Incident Handling process for handling a simulated spear phishing incident [T1566.001](https://attack.mitre.org/techniques/T1566/001/). 
 
 ## Lab Overview
-Microsoft Advanced Threat Analytics is set up on the WEF machine, and a lightweight ATA gateway is on the DC.  There are pre-installed tools like Splunk, Powershell logging, and Sysmon to help monitor and log system activity.  Additionally, Zeek and Suricata are configured to track network traffic, while Guacamole allows users to access all hosts from their web browser.
+Microsoft Advanced Threat Analytics is set up on the WEF machine, and a lightweight ATA gateway is on the DC.  There are pre-installed tools like Splunk, Powershell logging, and Sysmon to help monitor and log system activity. Velociraptor and Velociraptor agents are installed give the lab EDR capabilities with forensic analysis. Additionally, Zeek and Suricata are configured to track network traffic, while Guacamole allows users to access all hosts from their web browser. 
 
 ### Lab
 <img alt="Lab" src="/Images/lab.png" width=50% height=50%>
@@ -35,12 +35,12 @@ The lab used is the [Detection Lab](https://github.com/clong/DetectionLab)﻿ d
 
 
 ## Preparation
-Getting to know the steps involved in responding to security incidents is really important. This means learning how to handle situations when something goes wrong. It also involves making sure they can access the tools and systems needed to do their job effectively. Having the right resources is crucial for resolving issues quickly. By understanding these protocols and ensuring they have access, they can help keep the organization safe from cyber threats.
+Getting to know the steps involved in responding to security incidents is really important. This means learning how to handle situations when something goes wrong. It also involves making sure tools and systems can be accessed as needed to do the job effectively. Having the right resources is crucial for resolving issues quickly. Understanding these protocols and ensuring access helps keep the organization safe from cyber threats.
 
 
 
 ## Identification
-A daily scheduled alert on Splunk returned a macro excel file on host 'win10'. The alert works by searching EventCode=11 and filtering for only macro office documents. Since the source is not yet known or if the file is malicious, an investigation was started. For this simulation, the file is downloaded via AtomicRedTeam. In reality, this macro document may have been stopped by an Email Security Gateway, but there are cases where users are allowed to use macros. The first move is to find the source of the downloaded file using Splunk. While searching the Zeek dns.log file in the SIEM for unique DNS queries that occurred within 5 seconds before or after the FileCreate event, a query for the github.com domain was found. The domain is considered suspicious in this simulation. AbuseIPDB would be a good resource to find if a website is suspicious. Only knowing that the website was DNS queried is not enough to prove the website was the source of the '.xlsm' file. Next searching for only 'xlsm' and 'github' returns the web request for the file download, proving the file was downloaded from the suspicious website. Finally scanning the file in VirusTotal returned positive scans.
+A scheduled alert on Splunk returned a macro excel file on host 'win10'. The alert works by searching EventCode=11 and filtering for only macro office documents. Since the source is not yet known or if the file is malicious, an investigation was started. For this simulation, the file is downloaded via AtomicRedTeam. In reality, this macro document may have been stopped by an Email Security Gateway, but there are cases where users are allowed to use macros. The first move is to find the source of the downloaded file using Splunk. For this searching the Zeek dns.log file in the SIEM for unique DNS queries that occurred within 5 seconds before or after the FileCreate event, a query for the github.com domain was found. The domain is considered suspicious in this simulation. AbuseIPDB would be a good resource to find if a website is suspicious. Only knowing that the website was DNS queried is not enough to prove the website was the source of the '.xlsm' file. Next searching for only 'xlsm' and 'github' returns the web request for the file download, proving the file was downloaded from the suspicious website. Finally scanning the file in VirusTotal returned positive scans.
 
 ### Alert
 <img alt="Alert1" src="/Images/alert1.png" width=50% height=50%>
@@ -49,7 +49,7 @@ A daily scheduled alert on Splunk returned a macro excel file on host 'win10'. T
 <img alt="Alert2" src="/Images/alert2.png" width=50% height=50%>
 
 ### Download Confirmed
-<img alt="Alert3" src="/Images/alert2.png" width=50% height=50%>
+<img alt="Alert3" src="/Images/alert3.png" width=50% height=50%>
 
 
 ## Containment
@@ -65,7 +65,7 @@ After removing the document. Using Velociraptor a threat hunt was used that scan
 <img alt="Remove-Rescan" src="/Images/remove-rescan.png" width=50% height=50%>
 
 ## Recovery
-During the recovery phase a backup solution would be used. This may be a re-imaging of the workstation but in this case a snapshot restore would be the backup solution.
+During the recovery phase a pre-configured backup solution would be used. This may be a re-imaging of the workstation but in this case a snapshot restore would be the backup solution.
 ### Backup-Solution
 <img alt="Backup-Solution" src="/Images/backup-solution.png" width=50% height=50%>
 
