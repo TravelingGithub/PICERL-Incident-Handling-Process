@@ -67,7 +67,7 @@ After removing the document. Using Velociraptor a threat hunt was used that scan
 ## Recovery
 During the recovery phase a pre-configured backup solution would be used. This may be a re-imaging of the workstation but in this case Veeam is the backup solution for a full restore.
 ### Backup-Solution
-<img alt="Backup-Solution" src="/Images/VeeamRecovery.webp" width=50% height=50%>
+<img alt="Backup-Solution" src="/Images/VeeamRecovery.jpg" width=50% height=50%>
 
 ## Lessons Learned
 ### Document
